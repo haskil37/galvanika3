@@ -8,12 +8,12 @@
         Title="MainWindow" Height="350" Width="525" WindowState="Maximized" WindowStyle="None">
     <Grid>
         <TabControl x:Name="tabControl">
-            <TabItem Header="TabItem">
+            <TabItem Header="TabItem" FontSize="25">
                 <Grid Background="#FFE5E5E5">
-                    <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="39,82,0,0" VerticalAlignment="Top" MouseLeftButtonDown="label_MouseLeftButtonDown"/>
+                    <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="39,82,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem">
+            <TabItem Header="TabItem" FontSize="25">
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
