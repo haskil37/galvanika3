@@ -6,38 +6,7 @@
         xmlns:local="clr-namespace:Galvanika3"
         mc:Ignorable="d"
         Title="MainWindow" Height="350" Width="525" WindowState="Maximized" WindowStyle="None" FontSize="20">
-    <Window.Resources>
-        <SolidColorBrush x:Key="TabItem.MouseOver.Background" Color="#FF0099CC"/>
-        <SolidColorBrush x:Key="TabItem.Disabled.Background" Color="#F0F0F0"/>
-        <SolidColorBrush x:Key="TabItem.Header.Selected.Background" Color="#00779F"/>
-        <Style x:Key="MyTabControlStyle" TargetType="{x:Type TabItem}">
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Setter Property="Foreground" Value="#989898"/>
-            <Setter Property="Background" Value="#E0E0E0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabItem}">
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Style x:Key="MyTabControl" TargetType="{x:Type TabControl}">
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type TabControl}">
-                        <Grid x:Name="templateRoot" ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
-                            <UniformGrid x:Name="headerPanel" Background="Transparent" IsItemsHost="true" KeyboardNavigation.TabIndex="1" Panel.ZIndex="1"/>
-                            <ContentPresenter x:Name="PART_SelectedContentHost" Grid.Row="1" ContentSource="SelectedContent" SnapsToDevicePixels="true"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Window.Resources>
-    <Grid>
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="9*"/>
@@ -96,72 +65,88 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Label Content="Время стекания капель 1 оператора" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" />
-                    <DockPanel LastChildFill="true" Grid.Row="1">
+                    <DockPanel LastChildFill="true" Grid.Row="1" HorizontalAlignment="Center">
                         <Label Content="Ожидание стекания капель в ванной № 5-7" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek_5_7" VerticalAlignment="Center" Margin="20,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler"/>
+                        <TextBox x:Name="Stek_5_7" VerticalAlignment="Center" Margin="20,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
-                    <DockPanel LastChildFill="true" Grid.Row="2">
+                    <DockPanel LastChildFill="true" Grid.Row="2" HorizontalAlignment="Center">
                         <Label Content="Ожидание стекания капель в ванной № 8-10" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek_8_10" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                        <TextBox x:Name="Stek_8_10" VerticalAlignment="Center" Margin="10,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
-                    <DockPanel LastChildFill="true" Grid.Row="3">
+                    <DockPanel LastChildFill="true" Grid.Row="3" HorizontalAlignment="Center">
                         <Label Content="Ожидание стекания капель в ванной № 9" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek_9" VerticalAlignment="Center" Margin="40,0,0,0"/>
+                        <TextBox x:Name="Stek_9" VerticalAlignment="Center" Margin="40,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
-                    <DockPanel LastChildFill="true" Grid.Row="4">
+                    <DockPanel LastChildFill="true" Grid.Row="4" HorizontalAlignment="Center">
                         <Label Content="Ожидание стекания капель в ванной № 11" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek_11" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                        <TextBox x:Name="Stek_11" VerticalAlignment="Center" Margin="30,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
-                    <DockPanel LastChildFill="true" Grid.Row="5">
+                    <DockPanel LastChildFill="true" Grid.Row="5" HorizontalAlignment="Center">
                         <Label Content="Ожидание стекания капель в ванной № 12" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek_12" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                        <TextBox x:Name="Stek_12" VerticalAlignment="Center" Margin="30,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
-                    <DockPanel LastChildFill="true" Grid.Row="6">
+                    <DockPanel LastChildFill="true" Grid.Row="6" HorizontalAlignment="Center">
                         <Label Content="Ожидание стекания капель в ванной № 13" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek_13" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                        <TextBox x:Name="Stek_13" VerticalAlignment="Center" Margin="30,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
-                    <DockPanel LastChildFill="true" Grid.Row="7">
+                    <DockPanel LastChildFill="true" Grid.Row="7" HorizontalAlignment="Center">
                         <Label Content="Ожидание стекания капель в ванной № 14" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek_14" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                        <TextBox x:Name="Stek_14" VerticalAlignment="Center" Margin="30,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
-                    <DockPanel LastChildFill="true" Grid.Row="8">
+                    <DockPanel LastChildFill="true" Grid.Row="8" HorizontalAlignment="Center">
                         <Label Content="Ожидание стекания капель в ванной № 15" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek_15" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                        <TextBox x:Name="Stek_15" VerticalAlignment="Center" Margin="30,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
                     <Label Grid.Row="9" Content="Время стекания капель 2 оператора" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" />
-                    <DockPanel LastChildFill="true" Grid.Row="10">
+                    <DockPanel LastChildFill="true" Grid.Row="10" HorizontalAlignment="Center">
                         <Label Content="Ожидание стекания капель в ванной № 16" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek16" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                        <TextBox x:Name="Stek16" VerticalAlignment="Center" Margin="30,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
-                    <DockPanel LastChildFill="true" Grid.Row="11">
+                    <DockPanel LastChildFill="true" Grid.Row="11" HorizontalAlignment="Center">
                         <Label Content="Ожидание стекания капель в ванной № 17-18" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek_17_18" VerticalAlignment="Center"/>
+                        <TextBox x:Name="Stek_17_18" VerticalAlignment="Center" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
-                    <DockPanel LastChildFill="true" Grid.Row="12">
+                    <DockPanel LastChildFill="true" Grid.Row="12" HorizontalAlignment="Center">
                         <Label Content="Ожидание стекания капель в ванной № 19" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek_19" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                        <TextBox x:Name="Stek_19" VerticalAlignment="Center" Margin="30,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
-                    <DockPanel LastChildFill="true" Grid.Row="13">
+                    <DockPanel LastChildFill="true" Grid.Row="13" HorizontalAlignment="Center">
                         <Label Content="Ожидание стекания капель в ванной № 20" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek_20" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                        <TextBox x:Name="Stek_20" VerticalAlignment="Center" Margin="30,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
-                    <DockPanel LastChildFill="true" Grid.Row="14">
+                    <DockPanel LastChildFill="true" Grid.Row="14" HorizontalAlignment="Center">
                         <Label Content="Ожидание стекания капель в ванной № 21" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek_21" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                        <TextBox x:Name="Stek_21" VerticalAlignment="Center" Margin="30,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
-                    <DockPanel LastChildFill="true" Grid.Row="15">
+                    <DockPanel LastChildFill="true" Grid.Row="15" HorizontalAlignment="Center">
                         <Label Content="Ожидание стекания капель в ванной № 22" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek_22" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                        <TextBox x:Name="Stek_22" VerticalAlignment="Center" Margin="30,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
-                    <DockPanel LastChildFill="true" Grid.Row="16">
-                        <Label Content="Ожидание стекания капель в ванной № 23" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek_23" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                    <DockPanel LastChildFill="true" Grid.Row="16" HorizontalAlignment="Center">
+                        <Label Content="Ожидание стекания капель в ванной № 23" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        <TextBox x:Name="Stek_23" VerticalAlignment="Center" Margin="30,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
-                    <DockPanel LastChildFill="true" Grid.Row="17">
+                    <DockPanel LastChildFill="true" Grid.Row="17" HorizontalAlignment="Center">
                         <Label Content="Ожидание стекания капель в ванной № 24-25" VerticalAlignment="Center" />
-                        <TextBox x:Name="Stek_24_25" VerticalAlignment="Center"/>
+                        <TextBox x:Name="Stek_24_25" VerticalAlignment="Center" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler" Width="100"/>
+                        <Label Content="сек." VerticalAlignment="Center" />
                     </DockPanel>
-                    <Button x:Name="Save" Grid.Row="18" Content="Сохранить изменения" Click="Save_Click"></Button>
+                    <Button x:Name="Save" Grid.Row="18" Content="Сохранить изменения" Click="Save_Click" Cursor="Hand" />
                 </Grid>
             </TabItem>
         </TabControl>

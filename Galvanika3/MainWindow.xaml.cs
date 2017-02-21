@@ -100,6 +100,8 @@ namespace Galvanika3
         {
             foreach (var item in tempDB)
             {
+                if (string.IsNullOrEmpty(item))
+                    break;
                 var itemNew = item;
                 if (item.Contains("//"))
                     itemNew = item.Substring(0, item.IndexOf('/'));
@@ -143,21 +145,21 @@ namespace Galvanika3
                         result = new MemoryData(tempIndex, tempNameP[0].Trim(), "timer", value.Trim(), value.Trim());
                     if (tempNameP[0].Contains("Stek") && tempNameP[0].Trim() != "Stek2" && tempNameP[0].Trim() != "Stek1")
                     {
-                                var tempTimerData = value.ToLower().Split('#');
-                                string tempTime;
-                                int newTempTime;
-                                if (tempTimerData[1].Contains("ms"))
-                                {
-                                    tempTime = tempTimerData[1].Replace("ms", "");
-                                    newTempTime = Convert.ToInt32(tempTime);
-                                }
-                                else
-                                {
-                                    tempTime = tempTimerData[1].Replace("s", "");
-                                    newTempTime = Convert.ToInt32(tempTime);
-                                    newTempTime = newTempTime * 1000;
-                                }
-                                Stek.Add(tempNameP[0], newTempTime);
+                        var tempTimerData = value.ToLower().Split('#');
+                        string tempTime;
+                        int newTempTime;
+                        if (tempTimerData[1].Contains("ms"))
+                        {
+                            tempTime = tempTimerData[1].Replace("ms", "");
+                            newTempTime = Convert.ToInt32(tempTime);
+                        }
+                        else
+                        {
+                            tempTime = tempTimerData[1].Replace("s", "");
+                            newTempTime = Convert.ToInt32(tempTime);
+                            newTempTime = newTempTime * 1000;
+                        }
+                        Stek.Add(tempNameP[0].Trim(), newTempTime);
                     }
                 }
                 else
@@ -234,7 +236,6 @@ namespace Galvanika3
                                 var result = new ProgramData(countKey, item, stringData[0], stringData[1], "", "", "", "");
                                 DataGridTable.Add(result);
                             }
-
                         }
                         else
                         {
@@ -992,62 +993,105 @@ namespace Galvanika3
             TextBox tb = obj as TextBox;
             if (tb != null)
             {
-                KeyValuePair<string, string> newStringinDB = new KeyValuePair<string, string>();
+                var newTime = 0;
+                if (!string.IsNullOrEmpty(tb.Text.Trim()))
+                    newTime = Convert.ToInt32(tb.Text.Trim());
                 switch (tb.Name)
                 {
                     case "Stek16":
-                        newStringinDB = DB.ElementAt(16);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(16));
                         break;
                     case "Stek_17_18":
-                        newStringinDB = DB.ElementAt(17);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(17));
                         break;
                     case "Stek_19":
-                        newStringinDB = DB.ElementAt(18);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(18));
                         break;
                     case "Stek_20":
-                        newStringinDB = DB.ElementAt(19);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(19));
                         break;
                     case "Stek_21":
-                        newStringinDB = DB.ElementAt(20);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(20));
                         break;
                     case "Stek_22":
-                        newStringinDB = DB.ElementAt(21);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(21));
                         break;
                     case "Stek_23":
-                        newStringinDB = DB.ElementAt(22);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(22));
                         break;
                     case "Stek_24_25":
-                        newStringinDB = DB.ElementAt(23);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(23));
                         break;
                     case "Stek_5_7":
-                        newStringinDB = DB.ElementAt(25);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(25));
                         break;
                     case "Stek_8_10":
-                        newStringinDB = DB.ElementAt(26);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(26));
                         break;
                     case "Stek_9":
-                        newStringinDB = DB.ElementAt(27);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(27));
                         break;
                     case "Stek_11":
-                        newStringinDB = DB.ElementAt(28);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(28));
                         break;
                     case "Stek_12":
-                        newStringinDB = DB.ElementAt(29);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(29));
                         break;
                     case "Stek_13":
-                        newStringinDB = DB.ElementAt(30);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(30));
                         break;
                     case "Stek_14":
-                        newStringinDB = DB.ElementAt(31);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(31));
                         break;
                     case "Stek_15":
-                        newStringinDB = DB.ElementAt(32);
+                        SaveToFile(tb.Name, newTime, DB.ElementAt(32));
                         break;
                 }
-                DB[newStringinDB.Key] = "S5T#" + Convert.ToInt32(tb.Text.Trim()) + "S";
             }
             for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj as DependencyObject); i++)
                 SaveTextBoxes(VisualTreeHelper.GetChild(obj, i));
+        }
+        private void SaveToFile(string Stek, int newTime, KeyValuePair<string, string> DBAdress)
+        {
+            if (DB[DBAdress.Key] == "S5T#" + newTime + "S") //Если неизменилось значение, то выходим
+                return;
+
+            DB[DBAdress.Key] = "S5T#" + newTime + "S";
+            this.Stek[Stek] = newTime * 1000;
+            int start = 0;
+            var allLines = new List<string>();
+            using (StreamReader fs = new StreamReader(Path, Encoding.Default))
+            {
+                while (true)
+                {
+                    start++;
+                    string tempLine = fs.ReadLine();
+                    if (tempLine == null)
+                        break;
+                    if (tempLine.Contains(Stek))
+                    {
+                        var tempLines = tempLine.Split(':');
+                        if (tempLines.Count() == 3)
+                        {
+                            var komment = tempLines[2].Split('/');
+                            string komm = "";
+                            if (komment.Count() > 1)
+                                komm = "//" + komment[2];
+                            allLines.Add(tempLines[0] + ":" + tempLines[1] + ":= S5T#" + Convert.ToInt32(newTime) + "S;	" + komm);
+                        }
+                        else
+                            allLines.Add(tempLine);
+                    }
+                    else
+                        allLines.Add(tempLine);
+                }
+            }
+            using (var fileStream = new FileStream(Path, FileMode.Open))
+            using (var streamWriter = new StreamWriter(fileStream, Encoding.Default))
+            {
+                foreach (var item in allLines)
+                    streamWriter.WriteLine(item);
+            }
         }
         #endregion
         #region Функции самой программы
@@ -1059,6 +1103,7 @@ namespace Galvanika3
                     tabControl.SelectedIndex = 0;
                     break;
                 case 2:
+                    FillTextBoxes();
                     tabControl.SelectedIndex = 1;
                     break;
                 case 3:
@@ -1095,6 +1140,25 @@ namespace Galvanika3
                 if (!IsTextAllowed(text)) e.CancelCommand();
             }
             else e.CancelCommand();
+        }
+        private void FillTextBoxes()
+        {
+            Stek16.Text = (Stek[Stek16.Name] / 1000).ToString();
+            Stek_17_18.Text = (Stek[Stek_17_18.Name] / 1000).ToString();
+            Stek_19.Text = (Stek[Stek_19.Name] / 1000).ToString();
+            Stek_20.Text = (Stek[Stek_20.Name] / 1000).ToString();
+            Stek_21.Text = (Stek[Stek_21.Name] / 1000).ToString();
+            Stek_22.Text = (Stek[Stek_22.Name] / 1000).ToString();
+            Stek_23.Text = (Stek[Stek_23.Name] / 1000).ToString();
+            Stek_24_25.Text = (Stek[Stek_24_25.Name] / 1000).ToString();
+            Stek_5_7.Text = (Stek[Stek_5_7.Name] / 1000).ToString();
+            Stek_8_10.Text = (Stek[Stek_8_10.Name] / 1000).ToString();
+            Stek_9.Text = (Stek[Stek_9.Name] / 1000).ToString();
+            Stek_11.Text = (Stek[Stek_11.Name] / 1000).ToString();
+            Stek_12.Text = (Stek[Stek_12.Name] / 1000).ToString();
+            Stek_13.Text = (Stek[Stek_13.Name] / 1000).ToString();
+            Stek_14.Text = (Stek[Stek_14.Name] / 1000).ToString();
+            Stek_15.Text = (Stek[Stek_15.Name] / 1000).ToString();
         }
         #endregion
     }
