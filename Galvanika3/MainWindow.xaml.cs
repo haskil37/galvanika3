@@ -15,7 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
-
+using System.Text.RegularExpressions;
 namespace Galvanika3
 {
     /// <summary>
@@ -141,23 +141,23 @@ namespace Galvanika3
                         result = new MemoryData(tempIndex, tempNameP[0].Trim(), "integer", value.Trim(), value.Trim());
                     if (tempNameP[1].Contains("TIME"))
                         result = new MemoryData(tempIndex, tempNameP[0].Trim(), "timer", value.Trim(), value.Trim());
-                    if (tempNameP[0].Contains("Stek"))
+                    if (tempNameP[0].Contains("Stek") && tempNameP[0].Trim() != "Stek2" && tempNameP[0].Trim() != "Stek1")
                     {
-                        var tempTimerData = value.ToLower().Split('#');
-                        string tempTime;
-                        int newTempTime;
-                        if (tempTimerData[1].Contains("ms"))
-                        {
-                            tempTime = tempTimerData[1].Replace("ms", "");
-                            newTempTime = Convert.ToInt32(tempTime);
-                        }
-                        else
-                        {
-                            tempTime = tempTimerData[1].Replace("s", "");
-                            newTempTime = Convert.ToInt32(tempTime);
-                            newTempTime = newTempTime * 1000;
-                        }
-                        Stek.Add(tempNameP[0], newTempTime);
+                                var tempTimerData = value.ToLower().Split('#');
+                                string tempTime;
+                                int newTempTime;
+                                if (tempTimerData[1].Contains("ms"))
+                                {
+                                    tempTime = tempTimerData[1].Replace("ms", "");
+                                    newTempTime = Convert.ToInt32(tempTime);
+                                }
+                                else
+                                {
+                                    tempTime = tempTimerData[1].Replace("s", "");
+                                    newTempTime = Convert.ToInt32(tempTime);
+                                    newTempTime = newTempTime * 1000;
+                                }
+                                Stek.Add(tempNameP[0], newTempTime);
                     }
                 }
                 else
@@ -308,6 +308,7 @@ namespace Galvanika3
         public MainWindow()
         {
             InitializeComponent();
+            button_Start.Focus();
             var openFile = ReadFileDB();
             if (!openFile)
                 return;
@@ -317,7 +318,6 @@ namespace Galvanika3
             backgroundWorker.WorkerSupportsCancellation = true;
 
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 1);
             dispatcherTimer.Start();
 
             DispatcherTimer timerForTimer = new DispatcherTimer();
@@ -984,6 +984,117 @@ namespace Galvanika3
                 valueBool = Parse("!" + valueBool);
 
             return valueBool.ToString();
+        }
+        #endregion
+        #region Изменение времени стекания
+        private void SaveTextBoxes(DependencyObject obj)
+        {
+            TextBox tb = obj as TextBox;
+            if (tb != null)
+            {
+                KeyValuePair<string, string> newStringinDB = new KeyValuePair<string, string>();
+                switch (tb.Name)
+                {
+                    case "Stek16":
+                        newStringinDB = DB.ElementAt(16);
+                        break;
+                    case "Stek_17_18":
+                        newStringinDB = DB.ElementAt(17);
+                        break;
+                    case "Stek_19":
+                        newStringinDB = DB.ElementAt(18);
+                        break;
+                    case "Stek_20":
+                        newStringinDB = DB.ElementAt(19);
+                        break;
+                    case "Stek_21":
+                        newStringinDB = DB.ElementAt(20);
+                        break;
+                    case "Stek_22":
+                        newStringinDB = DB.ElementAt(21);
+                        break;
+                    case "Stek_23":
+                        newStringinDB = DB.ElementAt(22);
+                        break;
+                    case "Stek_24_25":
+                        newStringinDB = DB.ElementAt(23);
+                        break;
+                    case "Stek_5_7":
+                        newStringinDB = DB.ElementAt(25);
+                        break;
+                    case "Stek_8_10":
+                        newStringinDB = DB.ElementAt(26);
+                        break;
+                    case "Stek_9":
+                        newStringinDB = DB.ElementAt(27);
+                        break;
+                    case "Stek_11":
+                        newStringinDB = DB.ElementAt(28);
+                        break;
+                    case "Stek_12":
+                        newStringinDB = DB.ElementAt(29);
+                        break;
+                    case "Stek_13":
+                        newStringinDB = DB.ElementAt(30);
+                        break;
+                    case "Stek_14":
+                        newStringinDB = DB.ElementAt(31);
+                        break;
+                    case "Stek_15":
+                        newStringinDB = DB.ElementAt(32);
+                        break;
+                }
+                DB[newStringinDB.Key] = "S5T#" + Convert.ToInt32(tb.Text.Trim()) + "S";
+            }
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(obj as DependencyObject); i++)
+                SaveTextBoxes(VisualTreeHelper.GetChild(obj, i));
+        }
+        #endregion
+        #region Функции самой программы
+        private void button_Menu_Click(object sender, RoutedEventArgs e)
+        {
+            switch (((Button)sender).TabIndex)
+            {
+                case 1:
+                    tabControl.SelectedIndex = 0;
+                    break;
+                case 2:
+                    tabControl.SelectedIndex = 1;
+                    break;
+                case 3:
+                    tabControl.SelectedIndex = 2;
+                    break;
+                case 4:
+                    tabControl.SelectedIndex = 3;
+                    break;
+                case 5:
+                    this.Close();
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            SaveTextBoxes(tabControl);
+        }
+        private Boolean IsTextAllowed(String text)
+        {
+            return Array.TrueForAll<Char>(text.ToCharArray(),
+                delegate (Char c) { return Char.IsDigit(c) || Char.IsControl(c); });
+        }
+        private void PreviewTextInputHandler(Object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsTextAllowed(e.Text);
+        }
+        private void PastingHandler(object sender, DataObjectPastingEventArgs e)
+        {
+            if (e.DataObject.GetDataPresent(typeof(String)))
+            {
+                String text = (String)e.DataObject.GetData(typeof(String));
+                if (!IsTextAllowed(text)) e.CancelCommand();
+            }
+            else e.CancelCommand();
         }
         #endregion
     }

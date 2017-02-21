@@ -5,18 +5,165 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Galvanika3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525" WindowState="Maximized" WindowStyle="None">
+        Title="MainWindow" Height="350" Width="525" WindowState="Maximized" WindowStyle="None" FontSize="20">
+    <Window.Resources>
+        <SolidColorBrush x:Key="TabItem.MouseOver.Background" Color="#FF0099CC"/>
+        <SolidColorBrush x:Key="TabItem.Disabled.Background" Color="#F0F0F0"/>
+        <SolidColorBrush x:Key="TabItem.Header.Selected.Background" Color="#00779F"/>
+        <Style x:Key="MyTabControlStyle" TargetType="{x:Type TabItem}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="Foreground" Value="#989898"/>
+            <Setter Property="Background" Value="#E0E0E0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="MyTabControl" TargetType="{x:Type TabControl}">
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabControl}">
+                        <Grid x:Name="templateRoot" ClipToBounds="true" SnapsToDevicePixels="true" KeyboardNavigation.TabNavigation="Local">
+                            <UniformGrid x:Name="headerPanel" Background="Transparent" IsItemsHost="true" KeyboardNavigation.TabIndex="1" Panel.ZIndex="1"/>
+                            <ContentPresenter x:Name="PART_SelectedContentHost" Grid.Row="1" ContentSource="SelectedContent" SnapsToDevicePixels="true"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <TabControl x:Name="tabControl">
-            <TabItem Header="TabItem" FontSize="25">
-                <Grid Background="#FFE5E5E5">
-                    <Label x:Name="label" Content="Label" HorizontalAlignment="Left" Margin="39,82,0,0" VerticalAlignment="Top"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="button_Start" Margin="5" Cursor="Hand" Click="button_Menu_Click" TabIndex="1">
+            <TextBlock TextAlignment="Center">Запуск линии<LineBreak/>с нулевого положения</TextBlock>
+        </Button>
+        <Button x:Name="button_Stekanie" Grid.Column="1" Margin="5" Cursor="Hand" Click="button_Menu_Click" TabIndex="2">
+            <TextBlock TextAlignment="Center">Время стекания<LineBreak/>капель</TextBlock>
+        </Button>
+        <Button x:Name="button_Info" Grid.Column="2" Margin="5" Cursor="Hand" TabIndex="3" Click="button_Menu_Click">
+            <TextBlock TextAlignment="Center">Просмотр исходного<LineBreak/>положения</TextBlock>
+        </Button>
+        <Button x:Name="button_Service" Grid.Column="3" Margin="5" Cursor="Hand" TabIndex="4" Click="button_Menu_Click">
+            <TextBlock TextAlignment="Center">Сервисный<LineBreak/>режим</TextBlock>
+        </Button>
+        <Button x:Name="button_Exit" Grid.Column="5" Content="Выход" Margin="5" Cursor="Hand" Click="button_Menu_Click" TabIndex="5"/>
+        <TabControl x:Name="tabControl" Grid.Row="1" Grid.ColumnSpan="7" BorderThickness="0">
+            <TabControl.ItemContainerStyle>
+                <Style TargetType="TabItem">
+                    <Setter Property="Visibility" Value="Hidden" />
+                </Style>
+            </TabControl.ItemContainerStyle>
+            <TabItem>
+                <Label x:Name="label"></Label>
+            </TabItem>
+            <TabItem>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label Content="Время стекания капель 1 оператора" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" />
+                    <DockPanel LastChildFill="true" Grid.Row="1">
+                        <Label Content="Ожидание стекания капель в ванной № 5-7" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek_5_7" VerticalAlignment="Center" Margin="20,0,0,0" PreviewTextInput="PreviewTextInputHandler" DataObject.Pasting="PastingHandler"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="true" Grid.Row="2">
+                        <Label Content="Ожидание стекания капель в ванной № 8-10" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek_8_10" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="true" Grid.Row="3">
+                        <Label Content="Ожидание стекания капель в ванной № 9" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek_9" VerticalAlignment="Center" Margin="40,0,0,0"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="true" Grid.Row="4">
+                        <Label Content="Ожидание стекания капель в ванной № 11" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek_11" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="true" Grid.Row="5">
+                        <Label Content="Ожидание стекания капель в ванной № 12" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek_12" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="true" Grid.Row="6">
+                        <Label Content="Ожидание стекания капель в ванной № 13" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek_13" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="true" Grid.Row="7">
+                        <Label Content="Ожидание стекания капель в ванной № 14" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek_14" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="true" Grid.Row="8">
+                        <Label Content="Ожидание стекания капель в ванной № 15" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek_15" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                    </DockPanel>
+                    <Label Grid.Row="9" Content="Время стекания капель 2 оператора" HorizontalAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="25" />
+                    <DockPanel LastChildFill="true" Grid.Row="10">
+                        <Label Content="Ожидание стекания капель в ванной № 16" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek16" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="true" Grid.Row="11">
+                        <Label Content="Ожидание стекания капель в ванной № 17-18" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek_17_18" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="true" Grid.Row="12">
+                        <Label Content="Ожидание стекания капель в ванной № 19" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek_19" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="true" Grid.Row="13">
+                        <Label Content="Ожидание стекания капель в ванной № 20" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek_20" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="true" Grid.Row="14">
+                        <Label Content="Ожидание стекания капель в ванной № 21" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek_21" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="true" Grid.Row="15">
+                        <Label Content="Ожидание стекания капель в ванной № 22" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek_22" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="true" Grid.Row="16">
+                        <Label Content="Ожидание стекания капель в ванной № 23" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek_23" VerticalAlignment="Center" Margin="30,0,0,0"/>
+                    </DockPanel>
+                    <DockPanel LastChildFill="true" Grid.Row="17">
+                        <Label Content="Ожидание стекания капель в ванной № 24-25" VerticalAlignment="Center" />
+                        <TextBox x:Name="Stek_24_25" VerticalAlignment="Center"/>
+                    </DockPanel>
+                    <Button x:Name="Save" Grid.Row="18" Content="Сохранить изменения" Click="Save_Click"></Button>
                 </Grid>
             </TabItem>
-            <TabItem Header="TabItem" FontSize="25">
-                <Grid Background="#FFE5E5E5"/>
-            </TabItem>
         </TabControl>
-
     </Grid>
 </Window>
