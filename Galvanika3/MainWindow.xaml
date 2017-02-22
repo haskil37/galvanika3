@@ -44,7 +44,7 @@
             <TextBlock TextAlignment="Center">Сервисный<LineBreak/>режим</TextBlock>
         </Button>
         <Button x:Name="button_Exit" Grid.Column="5" Content="Выход" Margin="5" Cursor="Hand" Click="button_Menu_Click" TabIndex="5"/>
-        <TabControl x:Name="tabControl" Grid.Row="1" Grid.ColumnSpan="7" BorderThickness="0">
+        <TabControl x:Name="tabControl" Grid.Row="1" Grid.ColumnSpan="7" BorderThickness="0" SelectedIndex="2">
             <TabControl.ItemContainerStyle>
                 <Style TargetType="TabItem">
                     <Setter Property="Visibility" Value="Hidden" />
@@ -167,8 +167,8 @@
             <TabItem>
                 <Grid x:Name="testWindow" >
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"/>
-                        <RowDefinition Height="1*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -181,97 +181,18 @@
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
-
                         <Rectangle Grid.Column="0" Grid.RowSpan="10" Stroke="black" Fill="Transparent" Margin="2,0,2,-5" />
                         <Rectangle Grid.Column="1" Grid.RowSpan="10" Stroke="black" Fill="Transparent" Margin="2,0,2,-5" />
                         <Rectangle Grid.Column="2" Grid.RowSpan="10" Stroke="black" Fill="Transparent" Margin="2,0,2,-5" />
                         <Rectangle Grid.Column="3" Grid.RowSpan="10" Stroke="black" Fill="Transparent" Margin="2,0,2,-5" />
-
                         <Label x:Name="Input1" Grid.Column="0" Content="Вход 0" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Label x:Name="Input2" Grid.Column="1" Content="Вход 1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Label x:Name="Input3" Grid.Column="2" Content="Вход 2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         <Label x:Name="Input4" Grid.Column="3" Content="Вход 3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
-                        <Grid Grid.Column="3" Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="2*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-                            <CheckBox x:Name="Input3Bit0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="0" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input3Bit1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="1" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input3Bit2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="2" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input3Bit3" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Content="3" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input3Bit4" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Content="4" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input3Bit5" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Content="5" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input3Bit6" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Content="6" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input3Bit7" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" Content="7" IsHitTestVisible="False" />
-                            <Label Grid.Column="1" VerticalAlignment="Center">fgdgfdgfdg</Label>
-                        </Grid>
-
-                        <Grid Grid.Column="2" Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="2*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-                            <CheckBox x:Name="Input2Bit0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="0" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input2Bit1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="1" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input2Bit2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="2" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input2Bit3" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Content="3" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input2Bit4" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Content="4" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input2Bit5" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Content="5" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input2Bit6" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Content="6" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input2Bit7" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" Content="7" IsHitTestVisible="False" />
-                            <Label Grid.Column="1" VerticalAlignment="Center">fgdgfdgfdg</Label>
-                        </Grid>
-                        <Grid Grid.Column="1" Grid.Row="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="2*"/>
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-                            <CheckBox x:Name="Input1Bit0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="0" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input1Bit1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="1" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input1Bit2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="2" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input1Bit3" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Content="3" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input1Bit4" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Content="4" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input1Bit5" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Content="5" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input1Bit6" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Content="6" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Input1Bit7" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" Content="7" IsHitTestVisible="False" />
-                            <Label Grid.Column="1" VerticalAlignment="Center">fgdgfdgfdg</Label>
-                        </Grid>
                         <Grid Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
-                                <ColumnDefinition Width="2*"/>
+                                <ColumnDefinition Width="5*"/>
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="1*"/>
@@ -291,7 +212,98 @@
                             <CheckBox x:Name="Input0Bit5" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Content="5" IsHitTestVisible="False" />
                             <CheckBox x:Name="Input0Bit6" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Content="6" IsHitTestVisible="False" />
                             <CheckBox x:Name="Input0Bit7" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" Content="7" IsHitTestVisible="False" />
-                            <Label Grid.Column="1" VerticalAlignment="Center">gdgfdgfdg</Label>
+                            <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Content="Аварийное выключение"/>
+                            <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Content="Автомат. реж."/>
+                            <Label Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Content="Замедление 1 оператор"/>
+                        </Grid>
+                        <Grid Grid.Column="1" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <CheckBox x:Name="Input1Bit0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="0" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input1Bit1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="1" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input1Bit2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="2" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input1Bit3" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Content="3" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input1Bit4" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Content="4" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input1Bit5" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Content="5" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input1Bit6" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Content="6" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input1Bit7" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" Content="7" IsHitTestVisible="False" />
+                            <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Content="1 оператор ввеху"/>
+                            <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Content="1 оператор внизу"/>
+                            <Label Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Content="1 опер. середина позиции"/>
+                            <Label Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Content="Замедление 2 оператор"/>
+                        </Grid>
+                        <Grid Grid.Column="2" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <CheckBox x:Name="Input2Bit0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="0" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input2Bit1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="1" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input2Bit2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="2" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input2Bit3" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Content="3" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input2Bit4" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Content="4" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input2Bit5" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Content="5" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input2Bit6" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Content="6" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input2Bit7" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" Content="7" IsHitTestVisible="False" />
+                            <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Content="2 оператор вверху"/>
+                            <Label Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Content="2 оператор внизу"/>
+                            <Label Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Content="2 опер. середина позиции"/>
+                            <Label Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Content="1 линия снаружи"/>
+                            <Label Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Content="1 линия внутри"/>
+                            <Label Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" Content="2 линия снаружи"/>
+                            <Label Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" Content="2 линия внутри"/>
+                        </Grid>
+                        <Grid Grid.Column="3" Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="5*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <CheckBox x:Name="Input3Bit0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="0" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input3Bit1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="1" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input3Bit2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="2" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input3Bit3" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Content="3" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input3Bit4" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Content="4" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input3Bit5" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Content="5" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input3Bit6" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Content="6" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Input3Bit7" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" Content="7" IsHitTestVisible="False" />
+                            <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Content="3 линия снаружи"/>
+                            <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Content="3 линия внутри"/>
+                            <Label Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Content="Желоб внизу"/>
+                            <Label Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Content="Квитирование 1"/>
+                            <Label Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Content="Квитирование 2"/>
+                            <Label Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Content="Квитирование 3"/>
                         </Grid>
                     </Grid>
                     <Grid Grid.Row="1" Margin="0,9,0,0">
@@ -303,9 +315,7 @@
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto"/>
                             <RowDefinition Height="1*"/>
-                            <RowDefinition Height="1*"/>
                         </Grid.RowDefinitions>
-
                         <Rectangle Grid.Column="0" Grid.RowSpan="3" Stroke="black" Fill="Transparent" Margin="2,0"/>
                         <Rectangle Grid.Column="1" Grid.RowSpan="3" Stroke="black" Fill="Transparent" Margin="2,0" />
                         <Rectangle Grid.Column="2" Grid.RowSpan="3" Stroke="black" Fill="Transparent" Margin="2,0" />
@@ -313,127 +323,96 @@
                         <Label x:Name="Output1" Grid.Column="0" Content="Выход 0" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,10" />
                         <Label x:Name="Output2" Grid.Column="1" Content="Выход 1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,10" />
                         <Label x:Name="Output3" Grid.Column="2" Content="Выход 2" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,10" />
-
-                        <Grid Grid.Row="1" Grid.Column="2">
+                        <Grid Grid.Column="0" Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="5*"/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox x:Name="Output2Bit0"  Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Output2Bit1"  Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Output2Bit2"  Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Output2Bit3"  Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Output2Bit4"  Grid.Column="4" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Output2Bit5"  Grid.Column="5" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Output2Bit6"  Grid.Column="6" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Output2Bit7"  Grid.Column="7" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False" />
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <CheckBox x:Name="Output0Bit0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="0" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output0Bit1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="1" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output0Bit2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="2" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output0Bit3" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Content="3" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output0Bit4" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Content="4" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output0Bit5" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Content="5" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output0Bit6" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Content="6" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output0Bit7" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" Content="7" IsHitTestVisible="False" />
+                            <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Content="1 опер. подъем "/>
+                            <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Content="1 опер. опускание"/>
+                            <Label Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Content="1 опер. вправо"/>
+                            <Label Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Content="1 опер. влево"/>
+                            <Label Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Content="1 опер. быстро"/>
+                            <Label Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Content="2 опер. подъем"/>
+                            <Label Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" Content="2 опер. опускание"/>
+                            <Label Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" Content="2 опер. вправо"/>
                         </Grid>
-                        <Grid Grid.Row="2" Grid.Column="2">
+                        <Grid Grid.Column="1" Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="5*"/>
                             </Grid.ColumnDefinitions>
-                            <Label Grid.Column="7" VerticalAlignment="Top" Content="0" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="6" VerticalAlignment="Top" Content="1" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="5" VerticalAlignment="Top" Content="2" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="4" VerticalAlignment="Top" Content="3" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="3" VerticalAlignment="Top" Content="4" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="2" VerticalAlignment="Top" Content="5" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="1" VerticalAlignment="Top" Content="6" HorizontalAlignment="Center"/>
-                            <Label Grid.Column="0" VerticalAlignment="Top" Content="7" HorizontalAlignment="Center"/>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <CheckBox x:Name="Output1Bit0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="0" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output1Bit1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="1" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output1Bit2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="2" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output1Bit3" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Content="3" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output1Bit4" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Content="4" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output1Bit5" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Content="5" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output1Bit6" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Content="6" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output1Bit7" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" Content="7" IsHitTestVisible="False" />
+                            <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Content="2 опер. влево"/>
+                            <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Content="2 опер. быстро"/>
+                            <Label Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Content="1 линия наружу"/>
+                            <Label Grid.Column="1" Grid.Row="3" VerticalAlignment="Center" Content="1 линия внутрь"/>
+                            <Label Grid.Column="1" Grid.Row="4" VerticalAlignment="Center" Content="2 линия наружу"/>
+                            <Label Grid.Column="1" Grid.Row="5" VerticalAlignment="Center" Content="2 линия внутрь"/>
+                            <Label Grid.Column="1" Grid.Row="6" VerticalAlignment="Center" Content="3 линия наружу"/>
+                            <Label Grid.Column="1" Grid.Row="7" VerticalAlignment="Center" Content="3 линия внутрь"/>
                         </Grid>
-
-                        <Grid Grid.Row="1" Grid.Column="1">
+                        <Grid Grid.Column="2" Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
+                                <ColumnDefinition Width="5*"/>
                             </Grid.ColumnDefinitions>
-                            <CheckBox x:Name="Output1Bit0"  Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False"/>
-                            <CheckBox x:Name="Output1Bit1"  Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False"/>
-                            <CheckBox x:Name="Output1Bit2"  Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False"/>
-                            <CheckBox x:Name="Output1Bit3"  Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False"/>
-                            <CheckBox x:Name="Output1Bit4"  Grid.Column="4" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False"/>
-                            <CheckBox x:Name="Output1Bit5"  Grid.Column="5" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Output1Bit6"  Grid.Column="6" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False" />
-                            <CheckBox x:Name="Output1Bit7"  Grid.Column="7" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False" />
-                        </Grid>
-                        <Grid Grid.Row="2" Grid.Column="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="7" VerticalAlignment="Top" Content="0" HorizontalAlignment="Center" />
-                            <Label Grid.Column="6" VerticalAlignment="Top" Content="1" HorizontalAlignment="Center" />
-                            <Label Grid.Column="5" VerticalAlignment="Top" Content="2" HorizontalAlignment="Center" />
-                            <Label Grid.Column="4" VerticalAlignment="Top" Content="3" HorizontalAlignment="Center" />
-                            <Label Grid.Column="3" VerticalAlignment="Top" Content="4" HorizontalAlignment="Center" />
-                            <Label Grid.Column="2" VerticalAlignment="Top" Content="5" HorizontalAlignment="Center" />
-                            <Label Grid.Column="1" VerticalAlignment="Top" Content="6" HorizontalAlignment="Center" />
-                            <Label Grid.Column="0" VerticalAlignment="Top" Content="7" HorizontalAlignment="Center" />
-                        </Grid>
-                        <Grid Grid.Row="1" Grid.Column="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <CheckBox x:Name="Output0Bit0"  Grid.Column="0" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="false" />
-                            <CheckBox x:Name="Output0Bit1"  Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False"/>
-                            <CheckBox x:Name="Output0Bit2"  Grid.Column="2" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False"/>
-                            <CheckBox x:Name="Output0Bit3"  Grid.Column="3" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False"/>
-                            <CheckBox x:Name="Output0Bit4"  Grid.Column="4" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False"/>
-                            <CheckBox x:Name="Output0Bit5"  Grid.Column="5" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False"/>
-                            <CheckBox x:Name="Output0Bit6"  Grid.Column="6" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False"/>
-                            <CheckBox x:Name="Output0Bit7"  Grid.Column="7" VerticalAlignment="Bottom" HorizontalAlignment="Center" IsHitTestVisible="False"/>
-                        </Grid>
-                        <Grid Grid.Row="2" Grid.Column="0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-                            <Label Grid.Column="7" VerticalAlignment="Top" Content="0" HorizontalAlignment="Center" />
-                            <Label Grid.Column="6" VerticalAlignment="Top" Content="1" HorizontalAlignment="Center" />
-                            <Label Grid.Column="5" VerticalAlignment="Top" Content="2" HorizontalAlignment="Center" />
-                            <Label Grid.Column="4" VerticalAlignment="Top" Content="3" HorizontalAlignment="Center" />
-                            <Label Grid.Column="3" VerticalAlignment="Top" Content="4" HorizontalAlignment="Center" />
-                            <Label Grid.Column="2" VerticalAlignment="Top" Content="5" HorizontalAlignment="Center" />
-                            <Label Grid.Column="1" VerticalAlignment="Top" Content="6" HorizontalAlignment="Center" />
-                            <Label Grid.Column="0" VerticalAlignment="Top" Content="7" HorizontalAlignment="Center" />
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <CheckBox x:Name="Output2Bit0" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Content="0" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output2Bit1" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Content="1" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output2Bit2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Content="2" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output2Bit3" Grid.Row="3" HorizontalAlignment="Right" VerticalAlignment="Center" Content="3" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output2Bit4" Grid.Row="4" HorizontalAlignment="Right" VerticalAlignment="Center" Content="4" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output2Bit5" Grid.Row="5" HorizontalAlignment="Right" VerticalAlignment="Center" Content="5" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output2Bit6" Grid.Row="6" HorizontalAlignment="Right" VerticalAlignment="Center" Content="6" IsHitTestVisible="False" />
+                            <CheckBox x:Name="Output2Bit7" Grid.Row="7" HorizontalAlignment="Right" VerticalAlignment="Center" Content="7" IsHitTestVisible="False" />
+                            <Label Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Content="лампа квит 1"/>
+                            <Label Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Content="лампа квит 2"/>
+                            <Label Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Content="лампа квит 3"/>
                         </Grid>
                     </Grid>
                 </Grid>

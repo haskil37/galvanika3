@@ -1178,7 +1178,7 @@ namespace Galvanika3
                 var tempBits = Convert.ToString(OutputData[i], 2);
                 while (tempBits.Length < 8)
                     tempBits = tempBits.Insert(0, "0");
-                //Т.к. тут отображается все задом наоборот то ReverseString не делаем
+                tempBits = ReverseString(tempBits);
                 for (int j = 0; j <= tempBits.Length; j++)
                 {
                     CheckBox chekbox = tabControl.FindName("Output" + i + "Bit" + j) as CheckBox;
