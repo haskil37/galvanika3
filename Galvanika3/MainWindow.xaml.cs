@@ -4,18 +4,13 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
-using System.Text.RegularExpressions;
+using System.Threading;
+
 namespace Galvanika3
 {
     /// <summary>
@@ -325,6 +320,12 @@ namespace Galvanika3
             timerForTimer.Tick += new EventHandler(timer_Tick);
             timerForTimer.Interval = new TimeSpan(0, 0, 0, 0, 100);
             timerForTimer.Start();
+
+            DispatcherTimer timerForInput = new DispatcherTimer();
+            timerForInput.Tick += new EventHandler(timer_Tick_Input);
+            timerForInput.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            timerForInput.Start();
+
         }
         #region Расчет
         private void Calculate()
@@ -828,6 +829,12 @@ namespace Galvanika3
             {
                 path = "output";
                 value.Output = Convert.ToInt32(valueBool).ToString();
+                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, 
+                    (ThreadStart)delegate ()
+                    {
+                        ServiceOutput();
+                    }
+                );
             }
             if (value.AEM.Contains("M"))
             {
@@ -1107,7 +1114,7 @@ namespace Galvanika3
                     tabControl.SelectedIndex = 1;
                     break;
                 case 3:
-                    tabControl.SelectedIndex = 2;
+                    InputData[0] = 127;
                     break;
                 case 4:
                     tabControl.SelectedIndex = 3;
@@ -1159,6 +1166,43 @@ namespace Galvanika3
             Stek_13.Text = (Stek[Stek_13.Name] / 1000).ToString();
             Stek_14.Text = (Stek[Stek_14.Name] / 1000).ToString();
             Stek_15.Text = (Stek[Stek_15.Name] / 1000).ToString();
+        }
+
+        #endregion
+        #region Обновление данных в сервисном режиме и на плате, считываение с платы
+        private void ServiceOutput()
+        {
+            //Здесь еще надо обновить данные на плате
+            for (int i = 0; i < 3; i++)
+            {
+                var tempBits = Convert.ToString(OutputData[i], 2);
+                while (tempBits.Length < 8)
+                    tempBits = tempBits.Insert(0, "0");
+                //Т.к. тут отображается все задом наоборот то ReverseString не делаем
+                for (int j = 0; j <= tempBits.Length; j++)
+                {
+                    CheckBox chekbox = tabControl.FindName("Output" + i + "Bit" + j) as CheckBox;
+                    if (chekbox != null && tempBits[j] == '1')
+                        chekbox.IsChecked = true;
+                }
+            }
+        }
+        private void timer_Tick_Input(object sender, EventArgs e)
+        {
+            //Считываем с платы и обновляем InputData
+            for (int i = 0; i < 4; i++)
+            {
+                var tempBits = Convert.ToString(InputData[i], 2);
+                while (tempBits.Length < 8)
+                    tempBits = tempBits.Insert(0, "0");
+                tempBits = ReverseString(tempBits);
+                for (int j = 0; j <= tempBits.Length; j++)
+                {
+                    CheckBox chekbox = tabControl.FindName("Input" + i + "Bit" + j) as CheckBox;
+                    if (chekbox != null && tempBits[j] == '1')
+                        chekbox.IsChecked = true;
+                }
+            }
         }
         #endregion
     }
