@@ -829,12 +829,6 @@ namespace Galvanika3
             {
                 path = "output";
                 value.Output = Convert.ToInt32(valueBool).ToString();
-                this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, 
-                    (ThreadStart)delegate ()
-                    {
-                        ServiceOutput();
-                    }
-                );
             }
             if (value.AEM.Contains("M"))
             {
@@ -922,6 +916,12 @@ namespace Galvanika3
                     break;
                 default: //output
                     OutputData[Convert.ToInt32(address[0])] = byteToSave;
+                    this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                        (ThreadStart)delegate ()
+                        {
+                            ServiceOutput();
+                        }
+                    );
                     break;
             }
             return true;
@@ -1167,7 +1167,6 @@ namespace Galvanika3
             Stek_14.Text = (Stek[Stek_14.Name] / 1000).ToString();
             Stek_15.Text = (Stek[Stek_15.Name] / 1000).ToString();
         }
-
         #endregion
         #region Обновление данных в сервисном режиме и на плате, считываение с платы
         private void ServiceOutput()
