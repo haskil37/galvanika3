@@ -52,8 +52,6 @@ namespace Galvanika3
         private string Path = "0000000d.AWL";
         private List<string> tempDB = new List<string>();
         private List<string> tempProgramList = new List<string>();
-
-        int count = 0;
         private bool ReadFileDB()
         {
             if (!File.Exists(Path))
@@ -250,7 +248,6 @@ namespace Galvanika3
         }
         #endregion
         #region Таймер и поток расчета
-        DispatcherTimer dispatcherTimer = new DispatcherTimer();
         private void timer_Tick(object sender, EventArgs e)
         {
             try
@@ -285,19 +282,12 @@ namespace Galvanika3
                 return;
             }
         }
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
-        {
-            backgroundWorker.RunWorkerAsync();
-            dispatcherTimer.Stop();
-        }
         private void backgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             Calculate();
         }
         private void backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            count++;
-            label.Content = count.ToString();
             backgroundWorker.RunWorkerAsync();
         }
         #endregion
@@ -309,12 +299,11 @@ namespace Galvanika3
             if (!openFile)
                 return;
 
+            FillTextBoxes();
+
             backgroundWorker.DoWork += backgroundWorker_DoWork;
             backgroundWorker.RunWorkerCompleted += backgroundWorker_RunWorkerCompleted;
             backgroundWorker.WorkerSupportsCancellation = true;
-
-            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Start();
 
             DispatcherTimer timerForTimer = new DispatcherTimer();
             timerForTimer.Tick += new EventHandler(timer_Tick);
@@ -1107,10 +1096,21 @@ namespace Galvanika3
             switch (((Button)sender).TabIndex)
             {
                 case 1:
+                    if (!backgroundWorker.IsBusy)
+                    {
+                        ResetAll(); //Возможно избыточно
+                        backgroundWorker.RunWorkerAsync();
+                    }
+                    else
+                    {
+                        if (DB["0.3"] == "true")
+                            MessageBox.Show("Для того чтобы запустить программу с нуля, нужно выключить автоматический режим");
+                        else
+                            ResetAll();
+                    }
                     tabControl.SelectedIndex = 0;
                     break;
                 case 2:
-                    FillTextBoxes();
                     tabControl.SelectedIndex = 1;
                     break;
                 case 3:
@@ -1120,11 +1120,56 @@ namespace Galvanika3
                     tabControl.SelectedIndex = 3;
                     break;
                 case 5:
+                    ResetAll();
                     this.Close();
                     break;
                 default:
                     break;
             }
+        }
+        private void Window_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.F1:
+                    if (!backgroundWorker.IsBusy)
+                    {
+                        ResetAll(); //Возможно избыточно
+                        backgroundWorker.RunWorkerAsync();
+                    }
+                    else
+                    {
+                        if (DB["0.3"] == "true")
+                            MessageBox.Show("Для того чтобы запустить программу с нуля, нужно выключить автоматический режим");
+                        else
+                            ResetAll();
+                    }
+                    tabControl.SelectedIndex = 0;
+                    button_Start.Focus();
+                    break;
+                case Key.F2:
+                    tabControl.SelectedIndex = 1;
+                    button_Stekanie.Focus();
+                    break;
+                case Key.F3:
+                    InputData[0] = 127;
+                    button_Info.Focus();
+                    break;
+                case Key.F4:
+                    tabControl.SelectedIndex = 3;
+                    button_Service.Focus();
+                    break;
+                case Key.F10:
+                    ResetAll();
+                    this.Close();
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            ResetAll();
         }
         private void Save_Click(object sender, RoutedEventArgs e)
         {
@@ -1171,7 +1216,7 @@ namespace Galvanika3
         #region Обновление данных в сервисном режиме и на плате, считываение с платы
         private void ServiceOutput()
         {
-            //Здесь еще надо обновить данные на плате
+            //Здесь еще надо обновить данные на плате, т.е. отправить Output
             for (int i = 0; i < 3; i++)
             {
                 var tempBits = Convert.ToString(OutputData[i], 2);
@@ -1198,10 +1243,67 @@ namespace Galvanika3
                 for (int j = 0; j <= tempBits.Length; j++)
                 {
                     CheckBox chekbox = tabControl.FindName("Input" + i + "Bit" + j) as CheckBox;
-                    if (chekbox != null && tempBits[j] == '1')
-                        chekbox.IsChecked = true;
+                    if (chekbox != null)
+                    {
+                        if (tempBits[j] == '1')
+                            chekbox.IsChecked = true;
+                        else
+                            chekbox.IsChecked = false;
+                    }
                 }
             }
+            //Обновляем таблицу действий операторов
+            zadOp1.Content = DB["46"];
+            zadOp2.Content = DB["44"];
+            istOp1.Content = DB["52"];
+            istOp2.Content = DB["42"];
+            rasOp1.Content = DB["50"];
+            rasOp2.Content = DB["40"];
+
+            if (DB["0.2"].ToLower() == "true")
+                deyOp1.Content = "Исходное";
+            else if (DB["0.5"].ToLower() == "true")
+                deyOp1.Content = "Ошибка позиции";
+            else if (DB["1.0"].ToLower() == "true")
+                deyOp1.Content = "Ожидание";
+            else if (DB["1.1"].ToLower() == "true")
+                deyOp1.Content = "Подъем";
+            else if (DB["1.2"].ToLower() == "true")
+                deyOp1.Content = "Опускание";
+            else if (DB["1.5"].ToLower() == "true")
+                deyOp1.Content = "Ход влево";
+            else if (DB["1.6"].ToLower() == "true")
+                deyOp1.Content = "Ход вправо";
+            else if (DB["1.7"].ToLower() == "true")
+                deyOp1.Content = "Ошибка датчиков";
+            else if (DB["54.4"].ToLower() == "true")
+                deyOp1.Content = "Ожидание загрузки";
+
+            if (DB["0.1"].ToLower() == "true")
+                deyOp2.Content = "Исходное";
+            else if (DB["0.6"].ToLower() == "true")
+                deyOp2.Content = "Ошибка позиции";
+            else if (DB["0.7"].ToLower() == "true")
+                deyOp2.Content = "Ожидание";
+            else if (DB["1.3"].ToLower() == "true")
+                deyOp2.Content = "Подъем";
+            else if (DB["1.4"].ToLower() == "true")
+                deyOp2.Content = "Опускание";
+            else if (DB["54.0"].ToLower() == "true")
+                deyOp2.Content = "Ход влево";
+            else if (DB["54.1"].ToLower() == "true")
+                deyOp2.Content = "Ход вправо";
+            else if (DB["54.2"].ToLower() == "true")
+                deyOp2.Content = "Ошибка датчиков";
+            else if (DB["54.4"].ToLower() == "true")
+                deyOp2.Content = "Ожидание загрузки";
+        }
+        private void ResetAll()
+        {
+            //InputData = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0 };
+            MarkerData = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+            OutputData = new List<int>() { 0, 0, 0, 0, 0, 0, 0, 0 };
+            //CБрасываем еще выхода на плате в 0.
         }
         #endregion
     }
